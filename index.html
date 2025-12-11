@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Space Invaders - A faithful 1:1 recreation of the classic 1978 Taito arcade game">
+    <meta name="keywords" content="Space Invaders, arcade, retro, game, classic">
+    <title>Space Invaders - 1978 Classic</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👾</text></svg>">
+</head>
+<body>
+    <div class="game-container">
+        <div class="arcade-cabinet">
+            <div class="cabinet-top">
+                <div class="marquee">
+                    <h1>SPACE INVADERS</h1>
+                </div>
+            </div>
+            
+            <div class="screen-bezel">
+                <div class="crt-screen">
+                    <canvas id="gameCanvas"></canvas>
+                    <div class="scanlines"></div>
+                    <div class="crt-overlay"></div>
+                </div>
+            </div>
+            
+            <div class="cabinet-controls">
+                <div class="control-panel">
+                    <div class="control-info">
+                        <span class="control-key">← →</span> MOVE
+                        <span class="control-key">SPACE</span> FIRE
+                        <span class="control-key">P</span> PAUSE
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="credits">
+            <p>Original Game © 1978 Taito Corporation</p>
+            <p>This is a fan recreation for educational purposes</p>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

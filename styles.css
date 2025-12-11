@@ -1,0 +1,330 @@
+/* Space Invaders - Styles */
+/* Authentic arcade cabinet aesthetics with CRT effects */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --arcade-black: #0a0a0a;
+    --arcade-dark: #1a1a2e;
+    --arcade-purple: #16213e;
+    --neon-green: #00ff00;
+    --neon-red: #ff0040;
+    --neon-blue: #00d4ff;
+    --crt-glow: rgba(0, 255, 0, 0.1);
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    min-height: 100vh;
+}
+
+/* Starfield background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, white, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 230px 80px, white, transparent),
+        radial-gradient(2px 2px at 300px 150px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 370px 200px, white, transparent),
+        radial-gradient(2px 2px at 450px 50px, rgba(255,255,255,0.8), transparent);
+    background-size: 500px 300px;
+    animation: twinkle 4s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Arcade Cabinet Styling */
+.arcade-cabinet {
+    background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2e 50%, #0a0a1a 100%);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 
+        0 0 50px rgba(0, 255, 0, 0.2),
+        0 0 100px rgba(0, 0, 0, 0.8),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+    border: 3px solid #333;
+}
+
+.cabinet-top {
+    margin-bottom: 15px;
+}
+
+.marquee {
+    background: linear-gradient(180deg, #000 0%, #1a0a2e 50%, #000 100%);
+    padding: 15px 40px;
+    border-radius: 10px 10px 0 0;
+    border: 2px solid #444;
+    text-align: center;
+    box-shadow: 
+        inset 0 0 30px rgba(255, 0, 64, 0.3),
+        0 0 20px rgba(255, 0, 64, 0.2);
+}
+
+.marquee h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 
+        0 0 10px var(--neon-green),
+        0 0 20px var(--neon-green),
+        0 0 40px var(--neon-green),
+        0 0 80px var(--neon-green);
+    letter-spacing: 4px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 
+            0 0 10px var(--neon-green),
+            0 0 20px var(--neon-green),
+            0 0 30px var(--neon-green);
+    }
+    to {
+        text-shadow: 
+            0 0 20px var(--neon-green),
+            0 0 40px var(--neon-green),
+            0 0 60px var(--neon-green),
+            0 0 80px var(--neon-green);
+    }
+}
+
+/* Screen Bezel */
+.screen-bezel {
+    background: #111;
+    padding: 15px;
+    border-radius: 10px;
+    border: 4px solid #222;
+    box-shadow: 
+        inset 0 0 50px rgba(0, 0, 0, 0.9),
+        0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* CRT Screen Effects */
+.crt-screen {
+    position: relative;
+    border-radius: 20px / 10px;
+    overflow: hidden;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 0 60px rgba(0, 0, 0, 0.4);
+}
+
+#gameCanvas {
+    display: block;
+    background: #000;
+    border-radius: 15px / 8px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Scanlines Effect */
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    border-radius: 15px / 8px;
+}
+
+/* CRT Overlay - curvature and vignette */
+.crt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        transparent 60%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    pointer-events: none;
+    border-radius: 15px / 8px;
+}
+
+/* Phosphor glow effect */
+.crt-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 255, 0, 0.03) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    animation: phosphor 0.05s linear infinite;
+}
+
+@keyframes phosphor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.98; }
+}
+
+/* Control Panel */
+.cabinet-controls {
+    margin-top: 15px;
+}
+
+.control-panel {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 15px 30px;
+    border-radius: 0 0 10px 10px;
+    border: 2px solid #333;
+    border-top: none;
+}
+
+.control-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.control-key {
+    background: linear-gradient(180deg, #333 0%, #222 100%);
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: var(--neon-green);
+    border: 1px solid #444;
+    box-shadow: 
+        0 2px 0 #111,
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    margin-right: 5px;
+}
+
+/* Credits */
+.credits {
+    text-align: center;
+    font-size: 8px;
+    color: #444;
+    letter-spacing: 1px;
+}
+
+.credits p {
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .arcade-cabinet {
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    .marquee {
+        padding: 10px 20px;
+    }
+
+    .marquee h1 {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+
+    .screen-bezel {
+        padding: 10px;
+    }
+
+    #gameCanvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .control-info {
+        flex-wrap: wrap;
+        font-size: 8px;
+        gap: 10px;
+    }
+
+    .control-key {
+        padding: 3px 6px;
+        font-size: 8px;
+    }
+}
+
+@media (max-height: 900px) {
+    .arcade-cabinet {
+        transform: scale(0.85);
+        transform-origin: center center;
+    }
+}
+
+@media (max-height: 750px) {
+    .arcade-cabinet {
+        transform: scale(0.7);
+    }
+}
+
+/* Touch device support hint */
+@media (hover: none) and (pointer: coarse) {
+    .control-info::after {
+        content: ' (Use keyboard)';
+        color: #666;
+    }
+}
+
+/* Loading state */
+#gameCanvas.loading {
+    background: 
+        linear-gradient(90deg, #000 0%, #111 50%, #000 100%);
+    background-size: 200% 100%;
+    animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
